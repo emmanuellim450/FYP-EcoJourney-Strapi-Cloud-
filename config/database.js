@@ -9,11 +9,11 @@ module.exports = ({ env }) => ({
       database: env('DATABASE_NAME', 'fypecojourney_db'),
       user: env('DATABASE_USERNAME', '440126'),
       password: env('DATABASE_PASSWORD', 'V1234!7393'),
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      ssl: env.bool('DATABASE_SSL', true)
+        ? { rejectUnauthorized: false }
+        : false,
     },
-    pool: { min: 2, max: 10 },
+    pool: { min: 0, max: 5 },
     acquireConnectionTimeout: 60000,
   },
 });
