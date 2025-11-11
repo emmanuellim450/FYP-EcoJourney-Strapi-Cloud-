@@ -9,11 +9,11 @@ module.exports = ({ env }) => ({
   },
   healthCheck: {
     path: '/_health',
-    maxDuration: 60000,
-    // 🕐 Add a short startup buffer to prevent premature checks
+    maxDuration: 90000,
     onSignal: async () => {
-      console.log('Starting Strapi... waiting before marking healthy');
-      await new Promise((resolve) => setTimeout(resolve, 5000)); // wait 5 seconds
-    },
+      console.log('Waiting 8 seconds before reporting healthy...');
+      await new Promise(resolve => setTimeout(resolve, 8000));
+},
+
   },
 });
