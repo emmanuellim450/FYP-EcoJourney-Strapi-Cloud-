@@ -7,9 +7,13 @@ module.exports = ({ env }) => ({
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
-  // ✅ Add this block to help Strapi Cloud pass readiness probe
   healthCheck: {
-    path: '/_health',      // Strapi Cloud checks this route
-    maxDuration: 60000,    // Allow up to 60 seconds for startup
+    path: '/_health',
+    maxDuration: 60000,
+    // 🕐 Add a short startup buffer to prevent premature checks
+    onSignal: async () => {
+      console.log('Starting Strapi... waiting before marking healthy');
+      await new Promise((resolve) => setTimeout(resolve, 5000)); // wait 5 seconds
+    },
   },
 });
