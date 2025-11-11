@@ -4,14 +4,13 @@ module.exports = ({ env }) => ({
   connection: {
     client: 'mysql',
     connection: {
-      host: env('DATABASE_HOST', 'caboose.proxy.rlwy.net'),
-      port: env.int('DATABASE_PORT', 50921),
-      database: env('DATABASE_NAME', 'railway'),
-      user: env('DATABASE_USERNAME', 'root'),
-      password: env('DATABASE_PASSWORD', 'cWgXLDruvgvRGqBhbOvYfQjFOmUTwaAQ'),
-      ssl: { rejectUnauthorized: false }, // <-- always allow self-signed
+      host: env('DATABASE_HOST', 'mysql-fypecojourney.alwaysdata.net'),
+      port: env.int('DATABASE_PORT', 3306),
+      database: env('DATABASE_NAME', 'fypecojourney_db'),
+      user: env('DATABASE_USERNAME', '440126'),
+      password: env('DATABASE_PASSWORD', 'V1234!7393'),
+      ssl: env.bool('DATABASE_SSL', false) ? { rejectUnauthorized: false } : false,
     },
     pool: { min: 2, max: 10 },
-    acquireConnectionTimeout: 60000,
   },
 });
