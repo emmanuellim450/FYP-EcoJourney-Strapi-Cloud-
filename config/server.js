@@ -7,4 +7,9 @@ module.exports = ({ env }) => ({
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
+  // ✅ Add this block to help Strapi Cloud pass readiness probe
+  healthCheck: {
+    path: '/_health',      // Strapi Cloud checks this route
+    maxDuration: 60000,    // Allow up to 60 seconds for startup
+  },
 });
